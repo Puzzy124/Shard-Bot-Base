@@ -3,4 +3,4 @@ dB:
   url: 'mongodb://root:no@db:27017'
   database: db
 
-token: token
+token: no

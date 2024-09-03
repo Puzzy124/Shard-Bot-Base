@@ -29,6 +29,7 @@ This is a simple Discord bot base for you to build off of and expand into someth
 - Free AI Image generator and TTS from elevenlabs
 - Easy to build off of
 - Organized
+- Custom rate limit wraper for 'groups', limits how many times any such command in a group can be run in a duration (wrapper applied manually)
 
 ## Commands
 

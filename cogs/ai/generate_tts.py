@@ -36,6 +36,7 @@ class GenTTSCog(commands.Cog):
             app_commands.Choice(name="👧 Matilda", value="matilda"),
         ]
     )
+    @rate_limit('ai', 5)
     async def generate_image_cmd(self, interaction: discord.Interaction, prompt: str, voice: app_commands.Choice[str]):
         try:
             await interaction.response.defer()

@@ -1,16 +1,10 @@
 from collections import defaultdict
+import discord
 import time
 import functools
 
-import discord
-
-import sys
-sys.path.append('..')
-
-from config import RateLimitedError
-
-request_count = defaultdict(int)
-last_reset = time.monotonic()
+last_reset = {}
+request_count = defaultdict(lambda: defaultdict(int))
 
 def rate_limit(group: str, max_requests: int):
     def decorator(func):
@@ -20,8 +14,11 @@ def rate_limit(group: str, max_requests: int):
             global request_count
             
             current_time = time.monotonic()
-            elapsed_time = current_time - last_reset.get(group, 0)
-
+            
+            if group not in last_reset:
+                last_reset[group] = current_time
+            
+            elapsed_time = current_time - last_reset[group]
             if elapsed_time >= 60:
                 request_count[group].clear()
                 last_reset[group] = current_time
@@ -29,7 +26,8 @@ def rate_limit(group: str, max_requests: int):
             request_count[group][interaction.user.id] += 1
 
             if request_count[group][interaction.user.id] > max_requests:
-                raise RateLimitedError("You have been rate limit lmao", f"Please try again later. You've exceeded the rate limit for the {group} group.")
+                await interaction.response.send_message(f"Rate limit exceeded. Please try again later.", ephemeral=True)
+                return
             else:
                 return await func(self, interaction, *args, **kwargs)
         return wrapper
