@@ -1,0 +1,6 @@
+dB:
+  mode: json
+  url: 'mongodb://root:no@db:27017'
+  database: db
+
+token: token
