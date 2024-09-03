@@ -33,7 +33,7 @@ This is a simple Discord bot base for you to build off of and expand into someth
 
 ## Commands
 
-- `/gennerate-image`: Generatea an AI image with any prompt, proxies arent needed for this command.
+- `/generate-image`: Generatea an AI image with any prompt, proxies arent needed for this command.
 - `/generate-tts`: Generate TTS with Elevenlabs (proxies recommended for this to work well)
 
 ## Troubleshooting
