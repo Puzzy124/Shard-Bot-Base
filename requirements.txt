@@ -1,0 +1,7 @@
+discord.py
+aiohttp
+ujson
+dotenv
+ujson
+motor
+odmantic
